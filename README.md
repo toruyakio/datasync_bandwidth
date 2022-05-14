@@ -6,16 +6,12 @@ This repo is for a sample which enable me to change DataSync bandwidth value for
 How to use:
 
 Python 3 environment with AWS credential for boto3.
-https://aws.amazon.com/jp/sdk-for-python/
-https://boto3.amazonaws.com/v1/documentation/api/latest/guide/configuration.html
+- https://aws.amazon.com/jp/sdk-for-python/
+- https://boto3.amazonaws.com/v1/documentation/api/latest/guide/configuration.html
 
 1. download or clone this repository
 2. run your DataSync task execution (manually or scheduled)
-3. 
-```
-% python3 updateTaskExecution.py
-```
-
+3. ```% python3 updateTaskExecution.py```
 
 使い方
 
@@ -27,18 +23,17 @@ override_start.json
 タスクを実行するときに、事前に定義したものを上書きして実行したい場合に利用。
 意図としては、スケジュール化すると1hに一回なので待っていられないから、マニュアル実行して、かつ、帯域を狭く、またALLにして更新がなくてもファイルを送るようにしている。
 
-<code>
+```
 % aws datasync start-task-execution --cli-input-json file://override_start.json
-</code>
+```
 
-この例ではあえて帯域幅を狭くして実行するもの
+この例ではあえて帯域幅を狭くして実行するもの。そして、
 
-そして、
-
-<code>
+```
 % aws datasync list-task-executions --task-arn $taskArn
+
 % aws datasync list-task-executions --task-arn arn:aws:datasync:ap-northeast-1:911679503813:task/task-0c026111a1d2225f8
-</code>
+```
 
 でそのタスクにおけるtask execution一覧が見れる。
 
@@ -46,15 +41,12 @@ override_start.json
 
 CLIの場合が、updateTaskExecution.sh で override_update.jsonを得てから、
 
-<code>
+```
 % aws datasync update-task-execution --cli-input-json file://override_update.json
-</code>
-
+```
 
 SDK（python）の場合が、
-
-<code>
+```
 % python3 updateTaskExecution.py
-</code>
-
+```
 こちらは、存在するタスクすべてから、今動いているものを探して帯域を変更する
