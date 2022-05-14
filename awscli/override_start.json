@@ -1,0 +1,8 @@
+{
+    "TaskArn": "arn:aws:datasync:ap-northeast-1:911679503813:task/task-0c026111a1d2225f8",
+    "OverrideOptions": {
+        "BytesPerSecond": 20971520,
+        "TransferMode": "ALL"
+    }
+}
+
