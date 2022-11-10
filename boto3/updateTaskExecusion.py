@@ -8,11 +8,12 @@ def get_running_task_execution_arn(task_arn):
   for task_execution in task_executions:
     task_execution_arn = task_execution["TaskExecutionArn"]
     task_execution_status = task_execution["Status"]
-    #
-    # getting task execution from a given taskARN where TRANSFERRING only.
-    # We can expect only one, since DataSync allow one task execution for each task 
-    #
-    if task_execution_status == "TRANSFERRING":
+    # getting task execution ARN from a given taskARN where the newest task execution is running.
+    # We can expect only one, since DataSync allow one task execution to run for each task 
+    # (QUEUED), LAUNCHING, PREPARING, TRANSFERRING
+    # if task_execution_status == "TRANSFERRING":
+    running_status = ('LAUNCHING', 'PREPARING', 'TRANSFERRING')
+    if task_execution_status in running_status:
         return task_execution_arn
 
 def get_task_execution_bandwidth(task_execution_arn):
